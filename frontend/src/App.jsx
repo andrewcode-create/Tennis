@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 //import SearchBox from "./components/SearchBox";
 //import PersonForm from "./components/PersonForm";
 //import personService from "./services/persons";
-import Form from "./components/Form";
+//import Form from "./components/Form";
 
 const App = (props) => {
   //const [persons, setPersons] = useState([]);
