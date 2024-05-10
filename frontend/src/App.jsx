@@ -1,18 +1,18 @@
 import { useState, useEffect } from "react";
-import Person from "./components/Person";
-import SearchBox from "./components/SearchBox";
-import PersonForm from "./components/PersonForm";
-import axios from "axios";
-import personService from "./services/persons";
+//import Person from "./components/Person";
+//import SearchBox from "./components/SearchBox";
+//import PersonForm from "./components/PersonForm";
+//import personService from "./services/persons";
 
 const App = (props) => {
-  const [persons, setPersons] = useState([]);
-  const [newName, setNewName] = useState("");
-  const [newNumber, setNewNumber] = useState("");
-  const [newSearch, setNewSearch] = useState("");
+  //const [persons, setPersons] = useState([]);
+  //const [newName, setNewName] = useState("");
+  //const [newNumber, setNewNumber] = useState("");
+  //const [newSearch, setNewSearch] = useState("");
   const [notification, setNotification] = useState(null);
   const [notificationStyle, setNotificationStyle] = useState(null);
 
+  /*
   useEffect(() => {
     console.log("getting the phonebook...");
     personService.getAll().then((people) => {
@@ -20,15 +20,16 @@ const App = (props) => {
       setPersons(people);
     });
   }, []);
+  */
 
   const Notification = ({ message, style }) => {
     if (message === null) {
       return null;
     }
-
     return <div className={style}>{message}</div>;
   };
 
+  /*
   const addName = (event) => {
     event.preventDefault();
     if (newName === "") {
@@ -120,7 +121,9 @@ const App = (props) => {
         }, 5000);
       });
   };
+  */
 
+  /*
   const deletePerson = (id) => {
     if (
       !window.confirm(
@@ -139,21 +142,25 @@ const App = (props) => {
       })
       .catch(() => alert(`Could not delete note id ${id} from server`));
   };
-
+  */
+  /*
   const handleNameChange = (event) => {
     //console.log(event.target.value);
     setNewName(event.target.value);
   };
-
+  */
+  /*
   const handleSearchChange = (event) => {
     //console.log(event.target.value);
     setNewSearch(event.target.value);
   };
-
+  */
+  /*
   const handleNumberChange = (event) => {
     setNewNumber(event.target.value);
   };
-
+  */
+  /*
   return (
     <div>
       <Notification message={notification} style={notificationStyle} />
@@ -180,6 +187,6 @@ const App = (props) => {
         ))}
     </div>
   );
+  */
 };
-
 export default App;
