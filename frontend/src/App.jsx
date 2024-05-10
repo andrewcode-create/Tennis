@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 //import SearchBox from "./components/SearchBox";
 //import PersonForm from "./components/PersonForm";
 //import personService from "./services/persons";
+import Form from "./components/Form";
 
 const App = (props) => {
   //const [persons, setPersons] = useState([]);
@@ -11,6 +12,29 @@ const App = (props) => {
   //const [newSearch, setNewSearch] = useState("");
   const [notification, setNotification] = useState(null);
   const [notificationStyle, setNotificationStyle] = useState(null);
+
+  const [newName, setNewName] = useState("");
+
+  const submitForm = () => {};
+  return (
+    <div>
+      <h1>Bjorn's Tennis Sign up</h1>
+      <p>
+        Sign up for the days and times you are availible, then press submit.
+      </p>
+      <p>If you have any issues, email xxx@to-fill-in.com</p>
+
+      <form onSubmit={submitForm}>
+        <div>
+          Name: <input value={newName} onChange={setNewName} />
+          <input type="radio" id="1" name="1" value="no" />{" "}
+          <label for="1">No</label>
+          <input type="radio" id="2" name="1" value="Yes" />{" "}
+          <label for="2">Yes</label>
+        </div>
+      </form>
+    </div>
+  );
 
   /*
   useEffect(() => {
