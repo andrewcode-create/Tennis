@@ -15,6 +15,10 @@ const App = (props) => {
 
   const [newName, setNewName] = useState("");
 
+  const dates = [["Monday 7:30"], ["Tuesday 7:30"], ["Friday 7:30"]];
+
+  const names = ["Amy", "Ben", "Charlie", "Eddy", "Zariah"];
+
   const submitForm = () => {};
   return (
     <div>
@@ -26,10 +30,17 @@ const App = (props) => {
 
       <form onSubmit={submitForm}>
         <div>
+          Name:{" "}
+          {names.map((name, key) => {
+            <div>
+              <input type="radio" name="nameselect" id={key} />
+              <label for={key}>{name}</label>
+            </div>;
+          })}
           Name: <input value={newName} onChange={setNewName} />
-          <input type="radio" id="1" name="1" value="no" />{" "}
+          <input type="radio" id="1" name="1" value="no" />
           <label for="1">No</label>
-          <input type="radio" id="2" name="1" value="Yes" />{" "}
+          <input type="radio" id="2" name="1" value="Yes" />
           <label for="2">Yes</label>
         </div>
       </form>
