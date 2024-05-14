@@ -30,7 +30,7 @@ const App = (props) => {
       </p>
       <p>If you have any issues, email xxx@to-fill-in.com</p>
       {dates.map((date) => (
-        <Day date={date} key={date[0]} />
+        <Day date={date} key={date[0]} options={dates} />
       ))}
     </div>
   );
