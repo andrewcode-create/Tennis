@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-//import Person from "./components/Person";
+import Day from "./components/Day";
 //import SearchBox from "./components/SearchBox";
 //import PersonForm from "./components/PersonForm";
 //import personService from "./services/persons";
@@ -20,6 +20,8 @@ const App = (props) => {
   const names = ["Amy", "Ben", "Charlie", "Eddy", "Zariah"];
 
   const submitForm = () => {};
+  console.log("start");
+
   return (
     <div>
       <h1>Bjorn's Tennis Sign up</h1>
@@ -27,8 +29,15 @@ const App = (props) => {
         Sign up for the days and times you are availible, then press submit.
       </p>
       <p>If you have any issues, email xxx@to-fill-in.com</p>
+      {dates.map((date) => (
+        <Day date={date} key={date[0]} />
+      ))}
+    </div>
+  );
 
-      <form onSubmit={submitForm}>
+  /*
+
+<form onSubmit={submitForm}>
         <div>
           Name:{" "}
           {names.map((name, key) => {
@@ -44,10 +53,16 @@ const App = (props) => {
           <label for="2">Yes</label>
         </div>
       </form>
-    </div>
-  );
 
-  /*
+
+
+
+
+
+
+
+
+
   useEffect(() => {
     console.log("getting the phonebook...");
     personService.getAll().then((people) => {
