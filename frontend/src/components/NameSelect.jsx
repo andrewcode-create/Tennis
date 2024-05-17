@@ -6,7 +6,11 @@ const NameSelect = ({ names, submitedName, setSubmitedName }) => {
     setThisName(event.target.value);
   };
   const handleClick = (event) => {
-    setSubmitedName(thisName);
+    console.log(thisName);
+    console.log(
+      JSON.stringify(names.filter((thing) => thing.name === thisName))
+    );
+    setSubmitedName(names.filter((thing) => thing.name === thisName));
   };
   return (
     <div>

@@ -18,8 +18,11 @@ const times = [["Monday 7:30"], ["Tuesday 7:30"], ["Friday 7:30"]];
 const options = ["no answer", "yes", "no"];
 
 let database = {};
-times.forEach((date) => {
-  database[date] = options[0];
+names.forEach((name) => {
+  database[name.id] = {};
+  times.forEach((date) => {
+    database[name.id][date] = options[0];
+  });
 });
 
 app.use(cors());
@@ -41,7 +44,7 @@ app.use(
 );
 
 app.get("/api", (request, response) => {
-  response.json({ times: database, names: names, responces: database });
+  response.json({ times: times, names: names, responses: database });
   /*
   Person.find({}).then((result) => {
     response.json(result);
@@ -61,6 +64,16 @@ app.get("/api/name/:id", (request, response) => {
   response.json(
     database.filter((thing) => thing.name.id === request.params.id)
   );
+});
+
+app.put("/api/:id", (request, response) => {
+  database[request.params.id] = request.body.JSON;
+  response.json(database[request.params.id]);
+});
+
+app.put("/api/:id/:date", (request, response) => {
+  database[request.params.id][request.params.date] = request.body.JSON;
+  response.json(database[request.params.id][request.params.date]);
 });
 
 /*

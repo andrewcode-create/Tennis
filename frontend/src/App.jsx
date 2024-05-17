@@ -16,7 +16,7 @@ const App = (props) => {
   const [dates, setDates] = useState(null);
   const [names, setNames] = useState(null);
   const [selectedOptions, setSelectedOptions] = useState({});
-  const [submitedName, setSubmitedName] = useState("");
+  const [submitedName, setSubmitedName] = useState({});
   /*
   const dates = [["Monday 7:30"], ["Tuesday 7:30"], ["Friday 7:30"]];
   const names = [
@@ -50,10 +50,14 @@ const App = (props) => {
   console.log("start");
 
   const handleOptionChange = (date, option) => {
-    setSelectedOptions((prevSelectedOptions) => ({
-      ...prevSelectedOptions,
-      [date]: option,
-    }));
+    setSelectedOptions((prevSelectedOptions) => {
+      const toret = {
+        ...prevSelectedOptions,
+        [date]: option,
+      };
+      console.log("name of updated person:", submitedName);
+      tennisService.updatePersonDay(submitedName, date, toret);
+    });
   };
 
   if (dates === null || names === null) {
@@ -71,7 +75,7 @@ const App = (props) => {
         Sign up for the days and times you are availible, then press submit.
       </p>
       <p>If you have any issues, email xxx@to-fill-in.com</p>
-      {submitedName === "" ? (
+      {Object.keys(submitedName).length === 0 ? (
         <div>
           <NameSelect
             names={names}
