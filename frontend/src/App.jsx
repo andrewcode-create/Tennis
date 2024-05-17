@@ -3,7 +3,7 @@ import Day from "./components/Day";
 import NameSelect from "./components/NameSelect";
 //import SearchBox from "./components/SearchBox";
 //import PersonForm from "./components/PersonForm";
-//import personService from "./services/persons";
+import tennisService from "./services/tennisService";
 //import Form from "./components/Form";
 
 const App = (props) => {
@@ -13,8 +13,11 @@ const App = (props) => {
   //const [newSearch, setNewSearch] = useState("");
   const [notification, setNotification] = useState(null);
   const [notificationStyle, setNotificationStyle] = useState(null);
+  const [dates, setDates] = useState(null);
+  const [names, setNames] = useState(null);
   const [selectedOptions, setSelectedOptions] = useState({});
   const [submitedName, setSubmitedName] = useState("");
+  /*
   const dates = [["Monday 7:30"], ["Tuesday 7:30"], ["Friday 7:30"]];
   const names = [
     { name: "Amy", id: 0 },
@@ -24,15 +27,25 @@ const App = (props) => {
     { name: "Sofie", id: 4 },
     { name: "Travis", id: 5 },
   ];
+  */
   const options = ["no answer", "yes", "no"];
 
   useEffect(() => {
-    //start everything with no answer
-    let tmp = {};
-    dates.forEach((date) => {
-      tmp[date] = options[0];
+    //get names
+    tennisService.getNames().then((names) => {
+      setNames(names);
     });
-    setSelectedOptions(tmp);
+
+    //get dates
+    tennisService.getTimes().then((dates) => {
+      setDates(dates);
+      //start everything with no answer
+      let tmp = {};
+      dates.forEach((date) => {
+        tmp[date] = options[0];
+      });
+      setSelectedOptions(tmp);
+    });
   }, []);
   console.log("start");
 
@@ -42,6 +55,14 @@ const App = (props) => {
       [date]: option,
     }));
   };
+
+  if (dates === null || names === null) {
+    return (
+      <div>
+        <h1>Please wait for server connection.</h1>
+      </div>
+    );
+  }
 
   return (
     <div>

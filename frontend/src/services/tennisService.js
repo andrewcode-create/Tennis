@@ -31,4 +31,11 @@ const updatePersonDay = (name, date, newObject) => {
   return request.then((response) => response.data);
 };
 
-export default { getAll, getPerson, updatePerson, updatePersonDay, getNames };
+export default {
+  getAll,
+  getPerson,
+  updatePerson,
+  updatePersonDay,
+  getNames,
+  getTimes,
+};

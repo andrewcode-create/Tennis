@@ -14,11 +14,11 @@ const names = [
   { name: "Sofie", id: 4 },
   { name: "Travis", id: 5 },
 ];
-const dates = [["Monday 7:30"], ["Tuesday 7:30"], ["Friday 7:30"]];
+const times = [["Monday 7:30"], ["Tuesday 7:30"], ["Friday 7:30"]];
 const options = ["no answer", "yes", "no"];
 
 let database = {};
-dates.forEach((date) => {
+times.forEach((date) => {
   database[date] = options[0];
 });
 
