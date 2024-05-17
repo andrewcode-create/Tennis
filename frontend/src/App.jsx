@@ -13,15 +13,20 @@ const App = (props) => {
   //const [newSearch, setNewSearch] = useState("");
   const [notification, setNotification] = useState(null);
   const [notificationStyle, setNotificationStyle] = useState(null);
-
+  const [selectedOptions, setSelectedOptions] = useState({});
   const [submitedName, setSubmitedName] = useState("");
-
   const dates = [["Monday 7:30"], ["Tuesday 7:30"], ["Friday 7:30"]];
-
   const names = ["Amy", "Ben", "Charlie", "Eddy", "Zariah", ""];
+  const options = ["no answer", "yes", "no"];
 
-  const submitForm = () => {};
   console.log("start");
+
+  const handleOptionChange = (date, option) => {
+    setSelectedOptions((prevSelectedOptions) => ({
+      ...prevSelectedOptions,
+      [date]: option,
+    }));
+  };
 
   return (
     <div>
@@ -39,7 +44,15 @@ const App = (props) => {
           />
         </div>
       ) : (
-        dates.map((date) => <Day date={date} key={date[0]} options={dates} />)
+        dates.map((date) => (
+          <Day
+            date={date}
+            key={date[0]}
+            options={options}
+            selectedOption={selectedOptions[date]}
+            onOptionChange={(option) => handleOptionChange(date, option)}
+          />
+        ))
       )}
     </div>
   );

@@ -12,6 +12,7 @@ const Day = ({ date, options, selectedOption, onOptionChange }) => {
               onChange={(e) => onOptionChange(e.target.value)}
             />
           </label>
+          {option}
         </div>
       ))}
     </div>

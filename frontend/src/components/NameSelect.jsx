@@ -5,9 +5,12 @@ const NameSelect = ({ names, submitedName, setSubmitedName }) => {
   const handleNameDropChange = (event) => {
     setThisName(event.target.value);
   };
+  const handleClick = (event) => {
+    setSubmitedName(thisName);
+  };
   return (
-    <label>
-      Select Name{" "}
+    <div>
+      Select Name
       <select value={thisName} onChange={handleNameDropChange}>
         {names.map((name, index) => (
           <option value={name} key={index}>
@@ -15,7 +18,8 @@ const NameSelect = ({ names, submitedName, setSubmitedName }) => {
           </option>
         ))}
       </select>
-    </label>
+      <button onClick={handleClick}> Enter </button>
+    </div>
   );
 };
 
