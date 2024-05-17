@@ -13,8 +13,8 @@ const NameSelect = ({ names, submitedName, setSubmitedName }) => {
       Select Name
       <select value={thisName} onChange={handleNameDropChange}>
         {names.map((name, index) => (
-          <option value={name} key={index}>
-            {name}
+          <option value={name.name} key={name.id}>
+            {name.name}
           </option>
         ))}
       </select>

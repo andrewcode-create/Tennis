@@ -7,17 +7,17 @@ const getAll = () => {
 };
 
 const getPerson = (name) => {
-  const request = axios.get(`${baseUrl}/${name}`);
+  const request = axios.get(`${baseUrl}/${name.id}`);
   return request.then((response) => response.data);
 };
 
 const updatePerson = (name, newObject) => {
-  const request = axios.put(`${baseUrl}/${name}`, newObject);
+  const request = axios.put(`${baseUrl}/${name.id}`, newObject);
   return request.then((response) => response.data);
 };
 
 const updatePersonDay = (name, date, newObject) => {
-  const request = axios.put(`${baseUrl}/${name}/${date}`, newObject);
+  const request = axios.put(`${baseUrl}/${name.id}/${date}`, newObject);
   return request.then((response) => response.data);
 };
 

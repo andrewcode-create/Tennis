@@ -16,7 +16,14 @@ const App = (props) => {
   const [selectedOptions, setSelectedOptions] = useState({});
   const [submitedName, setSubmitedName] = useState("");
   const dates = [["Monday 7:30"], ["Tuesday 7:30"], ["Friday 7:30"]];
-  const names = ["Amy", "Ben", "Charlie", "Eddy", "Zariah", ""];
+  const names = [
+    { name: "Amy", id: 0 },
+    { name: "Ben", id: 1 },
+    { name: "Claire", id: 2 },
+    { name: "Nancy", id: 3 },
+    { name: "Sofie", id: 4 },
+    { name: "Travis", id: 5 },
+  ];
   const options = ["no answer", "yes", "no"];
 
   useEffect(() => {
