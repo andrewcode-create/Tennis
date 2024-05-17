@@ -6,8 +6,18 @@ const getAll = () => {
   return request.then((response) => response.data);
 };
 
+const getNames = () => {
+  const request = axios.get(`${baseUrl}/names`);
+  return request.then((response) => response.data);
+};
+
+const getTimes = () => {
+  const request = axios.get(`${baseUrl}/times`);
+  return request.then((response) => response.data);
+};
+
 const getPerson = (name) => {
-  const request = axios.get(`${baseUrl}/${name.id}`);
+  const request = axios.get(`${baseUrl}/name/${name.id}`);
   return request.then((response) => response.data);
 };
 
@@ -21,4 +31,4 @@ const updatePersonDay = (name, date, newObject) => {
   return request.then((response) => response.data);
 };
 
-export default { getAll, getPerson, updatePerson, updatePersonDay };
+export default { getAll, getPerson, updatePerson, updatePersonDay, getNames };

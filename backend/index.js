@@ -1,10 +1,26 @@
 require("dotenv").config();
-const Person = require("./models/person");
+//const Person = require("./models/person");
 const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors");
 const app = express();
 const PORT = process.env.PORT;
+
+const names = [
+  { name: "Amy", id: 0 },
+  { name: "Ben", id: 1 },
+  { name: "Claire", id: 2 },
+  { name: "Nancy", id: 3 },
+  { name: "Sofie", id: 4 },
+  { name: "Travis", id: 5 },
+];
+const dates = [["Monday 7:30"], ["Tuesday 7:30"], ["Friday 7:30"]];
+const options = ["no answer", "yes", "no"];
+
+let database = {};
+dates.forEach((date) => {
+  database[date] = options[0];
+});
 
 app.use(cors());
 app.use(express.static("dist"));
@@ -24,12 +40,30 @@ app.use(
   })
 );
 
-app.get("/api/persons", (request, response) => {
+app.get("/api", (request, response) => {
+  response.json({ times: database, names: names, responces: database });
+  /*
   Person.find({}).then((result) => {
     response.json(result);
   });
+  */
 });
 
+app.get("/api/names", (request, response) => {
+  response.json(names);
+});
+
+app.get("/api/times", (request, response) => {
+  response.json(times);
+});
+
+app.get("/api/name/:id", (request, response) => {
+  response.json(
+    database.filter((thing) => thing.name.id === request.params.id)
+  );
+});
+
+/*
 app.get("/api/persons/:id", (request, response, next) => {
   Person.findById(request.params.id)
     .then((person) => {
@@ -91,6 +125,7 @@ app.post("/api/persons", (request, response, next) => {
     })
     .catch((error) => next(error));
 });
+*/
 
 app.listen(PORT, "0.0.0.0", () => {
   console.log(`Server running on port ${PORT}`);
