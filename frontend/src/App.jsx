@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Day from "./components/Day";
+import NameSelect from "./components/NameSelect";
 //import SearchBox from "./components/SearchBox";
 //import PersonForm from "./components/PersonForm";
 //import personService from "./services/persons";
@@ -13,11 +14,11 @@ const App = (props) => {
   const [notification, setNotification] = useState(null);
   const [notificationStyle, setNotificationStyle] = useState(null);
 
-  const [newName, setNewName] = useState("");
+  const [submitedName, setSubmitedName] = useState("");
 
   const dates = [["Monday 7:30"], ["Tuesday 7:30"], ["Friday 7:30"]];
 
-  const names = ["Amy", "Ben", "Charlie", "Eddy", "Zariah"];
+  const names = ["Amy", "Ben", "Charlie", "Eddy", "Zariah", ""];
 
   const submitForm = () => {};
   console.log("start");
@@ -29,9 +30,17 @@ const App = (props) => {
         Sign up for the days and times you are availible, then press submit.
       </p>
       <p>If you have any issues, email xxx@to-fill-in.com</p>
-      {dates.map((date) => (
-        <Day date={date} key={date[0]} options={dates} />
-      ))}
+      {submitedName === "" ? (
+        <div>
+          <NameSelect
+            names={names}
+            submitedName={submitedName}
+            setSubmitedName={setSubmitedName}
+          />
+        </div>
+      ) : (
+        dates.map((date) => <Day date={date} key={date[0]} options={dates} />)
+      )}
     </div>
   );
 
