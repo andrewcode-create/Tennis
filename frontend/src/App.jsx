@@ -19,6 +19,14 @@ const App = (props) => {
   const names = ["Amy", "Ben", "Charlie", "Eddy", "Zariah", ""];
   const options = ["no answer", "yes", "no"];
 
+  useEffect(() => {
+    //start everything with no answer
+    let tmp = {};
+    dates.forEach((date) => {
+      tmp[date] = options[0];
+    });
+    setSelectedOptions(tmp);
+  }, []);
   console.log("start");
 
   const handleOptionChange = (date, option) => {
