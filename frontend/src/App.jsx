@@ -15,7 +15,7 @@ function App() {
 
         <Routes>
           <Route exact path="/" element={<Survey />} />
-          <Route path="/info" element={<Info />} />
+          <Route exact path="/info" element={<Info />} />
         </Routes>
       </div>
     </Router>

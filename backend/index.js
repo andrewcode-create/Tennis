@@ -3,6 +3,7 @@ require("dotenv").config();
 const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors");
+const path = require("path");
 const app = express();
 const PORT = process.env.PORT;
 
@@ -55,6 +56,10 @@ app.use(
     ].join(" ");
   })
 );
+
+app.get(["/", "/info", "/survey"], (req, res) => {
+  res.sendFile(path.resolve(__dirname, "dist", "index.html"));
+});
 
 app.get("/api", (request, response) => {
   response.json({ times: times, names: names, responses: database });
