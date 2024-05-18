@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Day from "./components/Day";
 import NameSelect from "./components/NameSelect";
 //import SearchBox from "./components/SearchBox";
@@ -39,14 +39,31 @@ const App = (props) => {
     //get dates
     tennisService.getTimes().then((dates) => {
       setDates(dates);
+
       //start everything with no answer
+      /*
       let tmp = {};
       dates.forEach((date) => {
         tmp[date] = options[0];
       });
       setSelectedOptions(tmp);
+      */
     });
   }, []);
+
+  useEffect(() => {
+    if (Object.entries(submitedName).length !== 0) {
+      console.log(
+        "getting options for person, name=",
+        submitedName,
+        "entries:",
+        Object.entries(submitedName)
+      );
+      tennisService.getPerson(submitedName).then((result) => {
+        setSelectedOptions(result);
+      });
+    }
+  }, [submitedName]);
   console.log("start");
 
   const handleOptionChange = (date, option) => {
@@ -87,15 +104,23 @@ const App = (props) => {
           />
         </div>
       ) : (
-        dates.map((date) => (
-          <Day
-            date={date}
-            key={date[0]}
-            options={options}
-            selectedOption={selectedOptions[date]}
-            onOptionChange={(option) => handleOptionChange(date, option)}
-          />
-        ))
+        <div>
+          {selectedOptions ? (
+            dates.map((date) => (
+              <Day
+                date={date}
+                key={date[0]}
+                options={options}
+                selectedOption={selectedOptions[date]}
+                onOptionChange={(option) => handleOptionChange(date, option)}
+              />
+            ))
+          ) : (
+            <div>
+              <h1>Please wait for server connection.</h1>
+            </div>
+          )}
+        </div>
       )}
     </div>
   );

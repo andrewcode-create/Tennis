@@ -17,7 +17,7 @@ const names = [
 const times = [["Monday 7:30"], ["Tuesday 7:30"], ["Friday 7:30"]];
 const options = ["no answer", "yes", "no"];
 
-let database = {};
+var database = {};
 names.forEach((name) => {
   database[name.id] = {};
   times.forEach((date) => {
@@ -61,9 +61,7 @@ app.get("/api/times", (request, response) => {
 });
 
 app.get("/api/name/:id", (request, response) => {
-  response.json(
-    database.filter((thing) => thing.name.id === request.params.id)
-  );
+  response.json(database[request.params.id]);
 });
 
 app.put("/api/:id", (request, response) => {
