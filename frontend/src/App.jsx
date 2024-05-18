@@ -50,6 +50,7 @@ const App = (props) => {
   console.log("start");
 
   const handleOptionChange = (date, option) => {
+    console.log("old selected options:", selectedOptions);
     setSelectedOptions((prevSelectedOptions) => {
       const toret = {
         ...prevSelectedOptions,
@@ -57,6 +58,7 @@ const App = (props) => {
       };
       console.log("name of updated person:", submitedName);
       tennisService.updatePersonDay(submitedName, date, toret);
+      return toret;
     });
   };
 
@@ -75,7 +77,7 @@ const App = (props) => {
         Sign up for the days and times you are availible, then press submit.
       </p>
       <p>If you have any issues, email xxx@to-fill-in.com</p>
-      {Object.keys(submitedName).length === 0 ? (
+      {Object.entries(submitedName).length === 0 ? (
         <div>
           <NameSelect
             names={names}

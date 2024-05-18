@@ -1,22 +1,32 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const NameSelect = ({ names, submitedName, setSubmitedName }) => {
-  const [thisName, setThisName] = useState({});
+  const [selectedNameId, setSelectedNameId] = useState("");
+  useEffect(() => {
+    if (names.length > 0) {
+      setSelectedNameId(names[0].id);
+    }
+  }, [names]);
+
   const handleNameDropChange = (event) => {
-    setThisName(event.target.value);
+    setSelectedNameId(event.target.value);
   };
+
   const handleClick = (event) => {
-    console.log(thisName);
-    //console.log(JSON.stringify(names.filter((thing) => thing.name === thisName)));
-    //setSubmitedName(names.filter((thing) => thing.name === thisName));
-    setSubmitedName(thisName);
+    const selectedName = names.find((name) => name.id === selectedNameId);
+    console.log(
+      "handle click on submit button for name, setting submited name to",
+      selectedName
+    );
+    setSubmitedName(selectedName);
   };
+
   return (
     <div>
       Select Name
-      <select value={thisName} onChange={handleNameDropChange}>
+      <select value={selectedNameId} onChange={handleNameDropChange}>
         {names.map((name, index) => (
-          <option value={name.name} key={name.id}>
+          <option value={name.id} key={name.id}>
             {name.name}
           </option>
         ))}

@@ -27,7 +27,7 @@ const updatePerson = (name, newObject) => {
 };
 
 const updatePersonDay = (name, date, newObject) => {
-  console.log("UPDATING PERSON!");
+  console.log("UPDATING PERSON! Name is", name, ", Id is", name.id);
   const request = axios.put(`${baseUrl}/${name.id}/${date}`, newObject);
   return request.then((response) => response.data);
 };

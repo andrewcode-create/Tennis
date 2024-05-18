@@ -7,12 +7,12 @@ const app = express();
 const PORT = process.env.PORT;
 
 const names = [
-  { name: "Amy", id: 0 },
-  { name: "Ben", id: 1 },
-  { name: "Claire", id: 2 },
-  { name: "Nancy", id: 3 },
-  { name: "Sofie", id: 4 },
-  { name: "Travis", id: 5 },
+  { name: "Amy", id: "0" },
+  { name: "Ben", id: "1" },
+  { name: "Claire", id: "2" },
+  { name: "Nancy", id: "3" },
+  { name: "Sofie", id: "4" },
+  { name: "Travis", id: "5" },
 ];
 const times = [["Monday 7:30"], ["Tuesday 7:30"], ["Friday 7:30"]];
 const options = ["no answer", "yes", "no"];
