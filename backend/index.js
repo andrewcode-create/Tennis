@@ -67,12 +67,21 @@ app.get("/api/name/:id", (request, response) => {
 });
 
 app.put("/api/:id", (request, response) => {
-  database[request.params.id] = request.body.JSON;
+  database[request.params.id] = request.body;
   response.json(database[request.params.id]);
 });
 
 app.put("/api/:id/:date", (request, response) => {
-  database[request.params.id][request.params.date] = request.body.JSON;
+  console.log(
+    "putting to database id:",
+    request.params.id,
+    ", date:",
+    request.params.date,
+    ", body:",
+    request.body
+  );
+  database[request.params.id][request.params.date] =
+    request.body[request.params.date];
   response.json(database[request.params.id][request.params.date]);
 });
 

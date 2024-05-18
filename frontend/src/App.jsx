@@ -56,8 +56,9 @@ const App = (props) => {
         ...prevSelectedOptions,
         [date]: option,
       };
-      console.log("name of updated person:", submitedName);
-      tennisService.updatePersonDay(submitedName, date, toret);
+      console.log("new selected options:", toret);
+      console.log("name of updated person:", submitedName, "option:", option);
+      tennisService.updatePersonDay(submitedName, date, { [date]: option });
       return toret;
     });
   };
