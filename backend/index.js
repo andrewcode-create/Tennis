@@ -25,6 +25,19 @@ names.forEach((name) => {
   });
 });
 
+// Define server-side routes
+// DOES NOT WORK
+/*
+app.get("/", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "views", "index.html"));
+});
+
+app.get("/info", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "views", "info.html"));
+});
+*/
+
+// Middleware
 app.use(cors());
 app.use(express.static("dist"));
 app.use(express.json());
