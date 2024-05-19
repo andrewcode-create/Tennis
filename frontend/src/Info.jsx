@@ -53,7 +53,32 @@ const Info = (props) => {
   return (
     <div>
       <h2>Info</h2>
-      <div>{}</div>
+      <div>
+        {times.map((time, index) => (
+          <div key={index}>
+            <strong>{time}</strong>
+            <br />
+            There are{" "}
+            {
+              database[time].filter((thing) => thing["answer"] === "yes").length
+            }{" "}
+            people who said yes.
+            <br />
+            There are{" "}
+            {
+              database[time].filter((thing) => thing["answer"] === "no").length
+            }{" "}
+            people who said no.
+            <br />
+            There are{" "}
+            {
+              database[time].filter((thing) => thing["answer"] === "no answer")
+                .length
+            }{" "}
+            people who said no answer.
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
