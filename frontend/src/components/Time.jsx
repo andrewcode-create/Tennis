@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import AnswerGroup from "./AnswerGroup";
 
 const Time = ({ time, database }) => {
   const [showYes, setShowYes] = useState(false);
@@ -9,34 +10,27 @@ const Time = ({ time, database }) => {
     <div>
       <strong>{time}</strong>
       <br />
-      <button onClick={() => setShowYes(!showYes)}>Toggle people</button> There
-      are {database[time].filter((thing) => thing["answer"] === "yes").length}{" "}
-      people who said yes.
-      {showYes
-        ? database[time]
-            .filter((thing) => thing["answer"] === "yes")
-            .map((thing) => <div key={thing.id}>{thing.name}</div>)
-        : ""}
-      <br />
-      <button onClick={() => setShowNo(!showNo)}>Toggle people</button> There
-      are {database[time].filter((thing) => thing["answer"] === "no").length}{" "}
-      people who said no.
-      {showNo
-        ? database[time]
-            .filter((thing) => thing["answer"] === "no")
-            .map((thing) => <div key={thing.id}>{thing.name}</div>)
-        : ""}
-      <br />
-      <button onClick={() => setShowNA(!showNA)}>Toggle people</button> There
-      are{" "}
-      {database[time].filter((thing) => thing["answer"] === "no answer").length}{" "}
-      people who said no answer.
-      {showNA
-        ? database[time]
-            .filter((thing) => thing["answer"] === "no answer")
-            .map((thing) => <div key={thing.id}>{thing.name}</div>)
-        : ""}
-      <br />
+      <AnswerGroup
+        show={showYes}
+        setShow={setShowYes}
+        answer={"yes"}
+        database={database}
+        time={time}
+      />
+      <AnswerGroup
+        show={showNo}
+        setShow={setShowNo}
+        answer={"no"}
+        database={database}
+        time={time}
+      />
+      <AnswerGroup
+        show={showNA}
+        setShow={setShowNA}
+        answer={"no answer"}
+        database={database}
+        time={time}
+      />
     </div>
   );
 };
