@@ -172,7 +172,7 @@ app.listen(PORT, "0.0.0.0", () => {
 
 // bad url
 const unknownEndpoint = (request, response) => {
-  console.log(`bad endpoint ${request}`);
+  console.log(`bad endpoint ${request.url}`);
   response.status(404).send({ error: "unknown endpoint" });
 };
 app.use(unknownEndpoint);
