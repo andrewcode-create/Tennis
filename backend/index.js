@@ -7,6 +7,12 @@ const path = require("path");
 const app = express();
 const PORT = process.env.PORT;
 
+//print mongodb
+Database.find({}).then((result) => {
+  jsonData = result.map((item) => item.toJSON());
+  console.log("full database:", JSON.stringify(jsonData, null, 2));
+});
+
 const names = [
   { name: "Amy", id: "0" },
   { name: "Ben", id: "1" },
@@ -25,6 +31,25 @@ names.forEach((name) => {
     database[name.id][date] = options[0];
   });
 });
+
+/*
+const tmp = new Database({
+  name: "Travis",
+  responses: [
+    { time: "Monday 7:30", response: "yes" },
+    { time: "Tuesday 7:30", response: "no" },
+    { time: "Wednesday 7:30" },
+  ],
+});
+tmp
+  .save()
+  .then(() => {
+    console.log("saved");
+  })
+  .catch(() => {
+    console.log("error saving");
+  });
+*/
 
 // Middleware
 app.use(cors());
@@ -45,21 +70,49 @@ app.use(
   })
 );
 
+//paging
 app.get(["/", "/info", "/survey"], (req, res) => {
   res.sendFile(path.resolve(__dirname, "dist", "index.html"));
 });
 
+//old
 app.get("/api", (request, response) => {
   response.json({ times: times, names: names, responses: database });
 });
 
+//new
+app.get("/api/new", (request, response) => {
+  Database.find({}).then((result) => {
+    response.json(result);
+  });
+});
+
+//old
 app.get("/api/names", (request, response) => {
   response.json(names);
 });
 
+//new
+app.get("/api/new/names", (request, response) => {
+  Database.find({}, "name").then((result) => {
+    response.json(result);
+  });
+});
+
+//old
 app.get("/api/times", (request, response) => {
   response.json(times);
 });
+
+//new
+//app.get("/api/new/times", (request, response) => {
+Database.find({}, { "responses.time": 1, _id: 0 })
+  .then((result) => {
+    //response.json(result);
+    console.log("!!!!!!!!!!!", JSON.stringify(result, null, 1));
+  })
+  .catch("error!!!!!!!!!!!!");
+//});
 
 app.get("/api/name/:id", (request, response) => {
   response.json(database[request.params.id]);

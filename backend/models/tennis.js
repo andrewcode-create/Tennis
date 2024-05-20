@@ -38,9 +38,17 @@ const DatabaseSchema = new mongoose.Schema({
 
 DatabaseSchema.set("toJSON", {
   transform: (document, returnedObject) => {
-    returnedObject.id = returnedObject._id.toString();
-    delete returnedObject._id;
-    delete returnedObject.__v;
+    if (returnedObject._id) {
+      returnedObject.id = returnedObject._id.toString();
+      delete returnedObject._id;
+    }
+    if (returnedObject.responses) {
+      returnedObject.responses = returnedObject.responses.map((res) => {
+        delete res._id;
+        return res;
+      });
+    }
+    if (returnedObject.__v) delete returnedObject.__v;
   },
 });
 
