@@ -1,5 +1,5 @@
 require("dotenv").config();
-//const Person = require("./models/person");
+const Database = require("./models/tennis");
 const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors");
@@ -26,18 +26,6 @@ names.forEach((name) => {
   });
 });
 
-// Define server-side routes
-// DOES NOT WORK
-/*
-app.get("/", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "views", "index.html"));
-});
-
-app.get("/info", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "views", "info.html"));
-});
-*/
-
 // Middleware
 app.use(cors());
 app.use(express.static("dist"));
@@ -63,11 +51,6 @@ app.get(["/", "/info", "/survey"], (req, res) => {
 
 app.get("/api", (request, response) => {
   response.json({ times: times, names: names, responses: database });
-  /*
-  Person.find({}).then((result) => {
-    response.json(result);
-  });
-  */
 });
 
 app.get("/api/names", (request, response) => {
@@ -100,70 +83,6 @@ app.put("/api/:id/:date", (request, response) => {
     request.body[request.params.date];
   response.json(database[request.params.id][request.params.date]);
 });
-
-/*
-app.get("/api/persons/:id", (request, response, next) => {
-  Person.findById(request.params.id)
-    .then((person) => {
-      if (person) {
-        response.json(person);
-      } else {
-        response.status(404).end();
-      }
-    })
-    .catch((error) => next(error));
-});
-
-app.get("/info", (request, response) => {
-  Person.find({}).then((result) => {
-    response.send(
-      `Phonebook has info for ${result.length} people. <br/><br/>${Date()}`
-    );
-  });
-});
-
-app.delete("/api/persons/:id", (request, response, next) => {
-  Person.findByIdAndDelete(request.params.id)
-    .then((result) => {
-      response.status(204).end();
-    })
-    .catch((error) => next(error));
-});
-
-app.put("/api/persons/:id", (request, response, next) => {
-  const body = request.body;
-
-  const person = {
-    name: body.name,
-    number: body.number,
-  };
-
-  Person.findByIdAndUpdate(request.params.id, person, {
-    new: true,
-    runValidators: true,
-  })
-    .then((updatedNote) => {
-      response.json(updatedNote);
-    })
-    .catch((error) => next(error));
-});
-
-app.post("/api/persons", (request, response, next) => {
-  const body = request.body;
-
-  const person = new Person({
-    name: body.name,
-    number: body.number,
-  });
-
-  person
-    .save()
-    .then((savedPerson) => {
-      response.json(savedPerson);
-    })
-    .catch((error) => next(error));
-});
-*/
 
 app.listen(PORT, "0.0.0.0", () => {
   console.log(`Server running on port ${PORT}`);

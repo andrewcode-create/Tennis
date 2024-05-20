@@ -16,27 +16,27 @@ mongoose
     console.log("error connecting to MongoDB:", error.message);
   });
 
-const personSchema = new mongoose.Schema({
-  name: {
+const ResponseSchema = new mongoose.Schema({
+  time: {
     type: String,
     required: true,
-    minLength: [3, "name has to be at least 3 characters"],
   },
-  number: {
+  response: {
     type: String,
-    minLength: [8, "number has to be at least 8 characters"],
-    validate: [
-      (val) => {
-        const re = /[0-9]{2,3}-[0-9]{2,}/;
-        return re.test(val);
-      },
-      "must be a valid phone number with 1 dash",
-    ],
-    required: true,
+    enum: ["no answer", "yes", "no"],
+    default: "no answer",
   },
 });
 
-personSchema.set("toJSON", {
+const DatabaseSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true,
+  },
+  responses: [ResponseSchema],
+});
+
+DatabaseSchema.set("toJSON", {
   transform: (document, returnedObject) => {
     returnedObject.id = returnedObject._id.toString();
     delete returnedObject._id;
@@ -44,4 +44,4 @@ personSchema.set("toJSON", {
   },
 });
 
-module.exports = mongoose.model("Person", personSchema);
+module.exports = mongoose.model("Database", DatabaseSchema);
