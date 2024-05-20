@@ -55,7 +55,10 @@ const Info = (props) => {
     <div>
       <h2>Info</h2>
       {times.map((time, index) => (
-        <Time key={index} database={database} time={time} />
+        <div key={index}>
+          <Time database={database} time={time} />
+          <br />
+        </div>
       ))}
     </div>
   );
