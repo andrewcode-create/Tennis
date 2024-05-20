@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import tennisService from "./services/tennisService";
 import { json } from "react-router-dom";
+import Time from "./components/Time";
 
 const Info = (props) => {
   const [rawDatabase, setRawDatabase] = useState({});
@@ -53,32 +54,9 @@ const Info = (props) => {
   return (
     <div>
       <h2>Info</h2>
-      <div>
-        {times.map((time, index) => (
-          <div key={index}>
-            <strong>{time}</strong>
-            <br />
-            There are{" "}
-            {
-              database[time].filter((thing) => thing["answer"] === "yes").length
-            }{" "}
-            people who said yes.
-            <br />
-            There are{" "}
-            {
-              database[time].filter((thing) => thing["answer"] === "no").length
-            }{" "}
-            people who said no.
-            <br />
-            There are{" "}
-            {
-              database[time].filter((thing) => thing["answer"] === "no answer")
-                .length
-            }{" "}
-            people who said no answer.
-          </div>
-        ))}
-      </div>
+      {times.map((time, index) => (
+        <Time key={index} database={database} time={time} />
+      ))}
     </div>
   );
 };
