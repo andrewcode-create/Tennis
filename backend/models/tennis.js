@@ -42,13 +42,13 @@ DatabaseSchema.set("toJSON", {
       returnedObject.id = returnedObject._id.toString();
       delete returnedObject._id;
     }
+    if (returnedObject.__v) delete returnedObject.__v;
     if (returnedObject.responses) {
       returnedObject.responses = returnedObject.responses.map((res) => {
         delete res._id;
         return res;
       });
     }
-    if (returnedObject.__v) delete returnedObject.__v;
   },
 });
 

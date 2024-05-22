@@ -105,15 +105,28 @@ app.get("/api/times", (request, response) => {
 });
 
 //new
-//app.get("/api/new/times", (request, response) => {
-Database.find({}, { "responses.time": 1, _id: 0 })
-  .then((result) => {
-    //response.json(result);
-    console.log("!!!!!!!!!!!", JSON.stringify(result, null, 1));
-  })
-  .catch("error!!!!!!!!!!!!");
-//});
+app.get("/api/new/times", (request, response) => {
+  Database.find({}, { "responses.time": 1, _id: 0 }).then((result) => {
+    if (!result) {
+      console.log("error no result");
+      return;
+    }
+    result = result[0]["responses"].map((t) => t.time);
+    //console.log("!!!!!", JSON.stringify(result, null, 1));
+  });
+  //.catch("error!!!!!!!!!!!!");
+});
 
+//new
+//request = { params: { id: "664ba70ddd080790e53883e9" } }; //travis
+app.get("/api/new/name/:id", (request, response) => {
+  Database.find({ _id: request.params.id }).then((result) => {
+    //console.log("!!!!!", JSON.stringify(result, null, 1));
+    response.json(result);
+  });
+});
+
+//old
 app.get("/api/name/:id", (request, response) => {
   response.json(database[request.params.id]);
 });
