@@ -4,41 +4,18 @@ import { json } from "react-router-dom";
 import Time from "./components/Time";
 
 const Info = (props) => {
-  const [responses, setResponses] = useState({});
+  const [rawDatabase, setRawDatabase] = useState({});
+  const [database, setDatabase] = useState({});
   const [times, setTimes] = useState([]);
   const [names, setNames] = useState({});
-  const server = useRef({
-    responses: false,
-    times: false,
-    names: false,
-  });
-  const [doneServer, setDoneServer] = useState(false);
-  const checkServer = (server, setDoneServer) => {
-    if (
-      server.current.responses &&
-      server.current.times &&
-      server.current.names
-    ) {
-      setDoneServer(true);
-    }
-  };
 
   useEffect(() => {
     tennisService.getAll().then((newDatabase) => {
-      checkServer();
-      setResponses(newDatabase);
-    });
-    tennisService.getTimes().then((newDatabase) => {
-      checkServer();
-      setTimes(newDatabase);
-    });
-    tennisService.getNames().then((newDatabase) => {
-      checkServer();
-      setNames(newDatabase);
+      setRawDatabase(newDatabase);
+      console.log("got database", JSON.stringify(newDatabase));
     });
   }, []);
 
-  /*
   useEffect(() => {
     if (!rawDatabase || Object.keys(rawDatabase).length === 0) return;
 
@@ -65,7 +42,14 @@ const Info = (props) => {
     setNames(rawDatabase["names"]);
     setDatabase(newDatabase);
   }, [rawDatabase]);
-*/
+
+  if (Object.keys(rawDatabase).length === 0) {
+    return (
+      <div>
+        <h1>Please wait for server connection</h1>
+      </div>
+    );
+  }
 
   return (
     <div>

@@ -11,6 +11,7 @@ const PORT = process.env.PORT;
 Database.find({}).then((result) => {
   jsonData = result.map((item) => item.toJSON());
   console.log("full database:", JSON.stringify(jsonData, null, 2));
+  console.log("End full database.");
 });
 
 const names = [
@@ -83,6 +84,7 @@ app.get("/api", (request, response) => {
 //new
 app.get("/api/new", (request, response) => {
   Database.find({}).then((result) => {
+    //console.log("getting /api/new, response:", JSON.stringify(result, null, 2));
     response.json(result);
   });
 });
@@ -112,9 +114,15 @@ app.get("/api/new/times", (request, response) => {
       return;
     }
     result = result[0]["responses"].map((t) => t.time);
+    response.json(result);
     //console.log("!!!!!", JSON.stringify(result, null, 1));
   });
   //.catch("error!!!!!!!!!!!!");
+});
+
+//old
+app.get("/api/name/:id", (request, response) => {
+  response.json(database[request.params.id]);
 });
 
 //new
@@ -124,11 +132,6 @@ app.get("/api/new/name/:id", (request, response) => {
     //console.log("!!!!!", JSON.stringify(result, null, 1));
     response.json(result);
   });
-});
-
-//old
-app.get("/api/name/:id", (request, response) => {
-  response.json(database[request.params.id]);
 });
 
 app.put("/api/:id", (request, response) => {
